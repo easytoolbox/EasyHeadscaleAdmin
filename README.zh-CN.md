@@ -267,32 +267,3 @@ dist/1panel-node
 4. 受保护页面从本地配置读取连接信息
 5. 服务端创建 Headscale Client
 6. 前端页面只请求本项目自己的 `/api/*`
-
-## GitHub 发布版工作流
-
-如果你希望本地保留完整开发版，同时只把整理后的代码推送到 GitHub，可以使用内置的发布工作流：
-
-```bash
-pnpm github:sync
-```
-
-默认会同步到当前项目同级目录下的：
-
-```text
-../36.EasyHeadscaleAdmin-github
-```
-
-也可以自定义目标目录：
-
-```bash
-sh scripts/sync-to-github.sh /absolute/path/to/publish-repo
-```
-
-同步脚本会排除本地专用内容，例如：
-
-- `.env`
-- `.next`
-- `node_modules`
-- 本地 SQLite 开发数据库
-- `.DS_Store`
-- 其他构建产物和临时文件

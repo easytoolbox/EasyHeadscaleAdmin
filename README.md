@@ -267,32 +267,3 @@ On first startup, the runtime wrapper will:
 4. protected pages read local config from SQLite
 5. the server creates a Headscale client with that config
 6. UI pages fetch data only from this project's own `/api/*` endpoints
-
-## GitHub Publish Workflow
-
-If you want to keep a full local development copy and only publish a cleaned snapshot to GitHub, use the provided publish workflow:
-
-```bash
-pnpm github:sync
-```
-
-By default, it syncs to a sibling directory:
-
-```text
-../36.EasyHeadscaleAdmin-github
-```
-
-You can also choose a custom target:
-
-```bash
-sh scripts/sync-to-github.sh /absolute/path/to/publish-repo
-```
-
-The sync script excludes local-only content such as:
-
-- `.env`
-- `.next`
-- `node_modules`
-- local SQLite dev database files
-- `.DS_Store`
-- other temporary build artifacts

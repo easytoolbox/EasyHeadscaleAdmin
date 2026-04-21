@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
+    --background: 30 33% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 205 89% 36%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 28 45% 93%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 32 28% 93%;
+    --muted-foreground: 215 16% 38%;
+    --accent: 153 37% 92%;
+    --accent-foreground: 160 64% 18%;
+    --destructive: 0 79% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 28 20% 86%;
+    --input: 30 25% 89%;
+    --ring: 205 89% 36%;
+    --success: 160 84% 28%;
+    --warning: 30 92% 50%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 224 41% 8%;
+    --foreground: 210 40% 96%;
+    --card: 222 32% 11%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 32% 11%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 191 91% 55%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 220 24% 16%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 221 21% 15%;
+    --muted-foreground: 217 12% 66%;
+    --accent: 158 38% 18%;
+    --accent-foreground: 154 73% 82%;
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 218 17% 21%;
+    --input: 218 17% 18%;
+    --ring: 191 91% 55%;
+    --success: 160 84% 52%;
+    --warning: 38 92% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(39, 141, 191, 0.14), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.08), transparent 28%);
+  }
+
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/85 backdrop-blur-xl;
+  }
+}

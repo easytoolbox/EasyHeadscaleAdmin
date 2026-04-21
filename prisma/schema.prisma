@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model HeadscaleInstance {
+  id              String      @id @default(cuid())
+  name            String      @default("Default Headscale")
+  serverUrl       String
+  encryptedApiKey String
+  description     String?
+  active          Boolean     @default(true)
+  lastValidatedAt DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  settings        SystemSetting[]
+  adminAccounts   AdminAccount[]
+  auditLogs       AuditLog[]
+}
+
+model SystemSetting {
+  id         String             @id @default(cuid())
+  instanceId String
+  key        String
+  value      String
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+  instance   HeadscaleInstance  @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+
+  @@unique([instanceId, key])
+}
+
+model UiPreference {
+  id          String   @id @default("default")
+  theme       String   @default("system")
+  density     String   @default("comfortable")
+  compactNav  Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+model AdminAccount {
+  id          String             @id @default(cuid())
+  instanceId  String?
+  email       String             @unique
+  displayName String
+  role        String             @default("owner")
+  oidcSub     String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  instance    HeadscaleInstance? @relation(fields: [instanceId], references: [id], onDelete: SetNull)
+}
+
+model AuditLog {
+  id          String             @id @default(cuid())
+  instanceId  String?
+  actor       String
+  action      String
+  targetType  String
+  targetId    String
+  detail      String?
+  createdAt   DateTime           @default(now())
+  instance    HeadscaleInstance? @relation(fields: [instanceId], references: [id], onDelete: SetNull)
+}

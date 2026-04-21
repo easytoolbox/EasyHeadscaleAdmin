@@ -1,0 +1,20 @@
+services:
+  easy-headscale-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: easy-headscale-admin
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "file:./dev.db"
+      APP_ENCRYPTION_KEY: "${APP_ENCRYPTION_KEY:-replace-with-a-long-random-secret-at-least-32-chars}"
+      NEXT_PUBLIC_APP_NAME: "EasyHeadscaleAdmin"
+      NEXT_PUBLIC_DEFAULT_THEME: "system"
+      HEADSCALE_REQUEST_TIMEOUT_MS: "10000"
+    volumes:
+      - easy-headscale-admin-data:/app/prisma
+    restart: unless-stopped
+
+volumes:
+  easy-headscale-admin-data:
